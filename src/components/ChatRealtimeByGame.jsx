@@ -160,11 +160,12 @@
 // src/pages/ChatPage.jsx
 import { useEffect, useRef, useState } from "react";
 // import { supabase } from "../../supabase/supabaseClient";
-import { useSession } from "../../context/SessionProvider";
+// import { useSession } from "../../context/SessionProvider";
 import { supabase } from "../supabase/supabaseClient";
+import { AuthContext } from "../context/AuthContext";
 
-export default function ChatPage() {
-    const { user } = useSession();
+export default function ChatRealtimeByGame() {
+    const { user } = AuthContext();
     const [messages, setMessages] = useState([]);
     const [text, setText] = useState("");
     const [loading, setLoading] = useState(true);
