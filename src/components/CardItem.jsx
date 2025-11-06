@@ -1,4 +1,4 @@
-// src/components/CardItem.jsx
+import icon from '../assets/favicon-02.png'
 export default function CardItem({ title, description, imageUrl }) {
     return (
         // <article className="bg-white rounded-lg shadow hover:shadow-md transition p-4">
@@ -10,7 +10,7 @@ export default function CardItem({ title, description, imageUrl }) {
                     loading="lazy"
                     className="w-full h-full object-cover"
                 />
-                <img src="../../public/favicon-02.png" className="absolute right-3 top-3 w-15 h-15" alt="" />
+                <img src={icon} className="absolute right-3 top-3 w-15 h-15" alt="" />
             </div>
             <div className=" p-6 py-10">
                 <h3 className="text-2xl font-bold mb-1 line-clamp-1">{title}</h3>
