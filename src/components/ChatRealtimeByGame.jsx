@@ -159,8 +159,6 @@
 
 // src/pages/ChatPage.jsx
 import { useEffect, useRef, useState } from "react";
-// import { supabase } from "../../supabase/supabaseClient";
-// import { useSession } from "../../context/SessionProvider";
 import { supabase } from "../supabase/supabaseClient";
 import { useAuth } from "../context/AuthContext";
 

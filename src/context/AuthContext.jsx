@@ -188,9 +188,9 @@ export function AuthProvider({ children }) {
     };
 
     return (
-        <SessionContext.Provider value={value}>
+        <AuthContext.Provider value={value}>
             {!loading && children}
-        </SessionContext.Provider>
+        </AuthContext.Provider>
     );
 }
 
