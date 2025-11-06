@@ -8,14 +8,15 @@ export default function FavoritesPage() {
     if (loading) return <p className="text-center mt-10 text-gray-600">Caricamento preferiti...</p>;
 
     return (
-        <div className="max-w-6xl mx-auto p-4">
+        <div className="max-w-[calc(full-2.5rem)] mx-auto p-4">
             <h1 className="text-3xl font-bold mb-6">I miei preferiti</h1>
 
             {errorMsg && <p className="text-red-600 mb-4">{errorMsg}</p>}
             {favorites.length === 0 ? (
                 <p className="text-gray-600">Non hai ancora aggiunto giochi ai preferiti.</p>
             ) : (
-                <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+                // <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+                <div className="flex flex-wrap gap-10">
                     {favorites.map((fav) => (
                         <div key={fav.id} className="bg-[#242424] shadow rounded-lg overflow-hidden">
                             <Link to={`/game/${fav.game_id}`}>

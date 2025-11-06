@@ -20,7 +20,7 @@ export default function SearchPage() {
             <h1 className="text-3xl font-bold mb-6 text-white">
                 Risultati per: <span className="text-green-600">"{query}"</span>
             </h1>
-            <div className="max-w-[calc(full-1.5rem)] mx-auto p-4">
+            <div className="max-w-[calc(full-2.5rem)] mx-auto p-4">
 
                 <div>
                     {loading && <p className="text-gray-500">Caricamento risultati…</p>}

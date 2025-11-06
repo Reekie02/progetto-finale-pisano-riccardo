@@ -6,6 +6,6 @@
 } */
 
 main {
-    background: #151515;
+    background: linear-gradient(147deg, rgba(36, 36, 36, .7)100%, rgba(36, 36, 36, 0)0%), url('../../public/bg-akai.png');
     color: rgb(1, 168, 62);
 }

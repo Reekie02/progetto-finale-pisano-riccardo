@@ -159,7 +159,7 @@ export default function LayoutMain() {
             {/* <footer className="bg-green-700 text-white text-center p-3 text-sm">
                 © 2025 A·KAI
             </footer> */}
-            <footer className=" bg-green-800 text-white ">
+            <footer className=" bg-[#151515] text-white ">
                 <div className="max-w-5xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
                     {/* Logo + nome */}
                     <div className="flex items-center gap-2">
@@ -185,7 +185,7 @@ export default function LayoutMain() {
                     </div>
                 </div>
 
-                {/* Bottom line */}
+
                 <div className="border-t border-green-500/30 text-center py-3 text-xs text-green-100">
                     © {new Date().getFullYear()} A·KAI · All rights reserved
                 </div>

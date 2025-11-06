@@ -22,7 +22,7 @@ export default function GameDetailPage() {
     if (!game) return <p className="text-center mt-10 text-red-600">Gioco non trovato.</p>;
 
     return (
-        <div className="max-w-3xl mx-auto mt-10 bg-[#242424] shadow rounded-lg p-6">
+        <div className="max-w-3xl mx-auto mt-10 shadow rounded-lg p-6">
             <div className="flex justify-between items-center">
                 <h1 className="text-3xl font-bold mb-3">{game.name}</h1>
                 <Link
@@ -38,7 +38,7 @@ export default function GameDetailPage() {
                 alt={game.name}
                 className="w-full rounded mb-4"
             />
-            <p className="text-[#eee] mb-4">{game.description_raw}</p>
+            <p className="text-[#eee] my-10">{game.description_raw}</p>
 
             <div className="flex justify-center">
                 <ToggleFavorite game={game} />

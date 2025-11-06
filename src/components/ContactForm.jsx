@@ -65,11 +65,9 @@ export default function ContactForm() {
 
     return (
         <div className="min-h-[70vh] flex items-start justify-center p-6">
-            <div className="w-full max-w-xl bg-[#242424] text-white rounded-xl shadow p-6">
-                <h1 className="text-2xl font-semibold mb-1">Contattaci</h1>
-                <p className="text-sm text-gray-300 mb-5">
-                    Hai domande o suggerimenti? Compila il form e ti risponderemo.
-                </p>
+            <div className="w-full max-w-xl  text-white rounded-xl my-auto p-6">
+                <h1 className="text-2xl font-semibold my-5">Contattaci</h1>
+
 
                 {status.msg && (
                     <div

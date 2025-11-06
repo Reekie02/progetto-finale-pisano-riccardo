@@ -115,7 +115,7 @@ export default function ProfilePage() {
             </form>
             <button
                 onClick={handleLogout}
-                className="bg-red-600 text-white cursor-pointer w-30 h-10 flex justify-center items-center text-xl my-5 ml-auto rounded mb-auto gap-2"
+                className="bg-red-600 text-white cursor-pointer w-30 h-10 hidden lg:flex justify-center items-center text-xl my-5 ml-auto rounded mb-auto gap-2"
             >
                 <p>Logout</p><i className="bi bi-box-arrow-right"></i>
             </button>
