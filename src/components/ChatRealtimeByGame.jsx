@@ -162,10 +162,10 @@ import { useEffect, useRef, useState } from "react";
 // import { supabase } from "../../supabase/supabaseClient";
 // import { useSession } from "../../context/SessionProvider";
 import { supabase } from "../supabase/supabaseClient";
-import { AuthContext } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 export default function ChatRealtimeByGame() {
-    const { user } = AuthContext();
+    const { user } = useAuth();
     const [messages, setMessages] = useState([]);
     const [text, setText] = useState("");
     const [loading, setLoading] = useState(true);
