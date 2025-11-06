@@ -1,6 +1,11 @@
 @import 'tailwindcss';
 @import 'bootstrap-icons';
 
+body {
+    background: #242424;
+    overflow-x: hidden;
+}
+
 /* :root {
     color-scheme: light;
 } */

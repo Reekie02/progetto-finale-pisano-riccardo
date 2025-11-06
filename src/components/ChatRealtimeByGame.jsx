@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
+// src/components/ChatRealtimeByGame.jsx
+import { useEffect, useState, useRef } from "react";
 import { supabase } from "../supabase/supabaseClient.js";
 import { useAuth } from "../context/AuthContext.jsx";
-import { fetchGameById } from "../services/rawgApi.js";
-import { useParams } from "react-router-dom";
-
 
 export default function ChatRealtimeByGame({ gameId }) {
     const { user } = useAuth();
     const [messages, setMessages] = useState([]);
     const [newMsg, setNewMsg] = useState("");
     const [loading, setLoading] = useState(true);
+    const [sending, setSending] = useState(false);
+    const listRef = useRef(null);
 
     // carica messaggi del gioco
     const fetchMessages = async () => {
@@ -21,21 +21,60 @@ export default function ChatRealtimeByGame({ gameId }) {
             .order("created_at", { ascending: true });
         if (!error) setMessages(data || []);
         setLoading(false);
+        // auto scroll in basso
+        requestAnimationFrame(() => {
+            listRef.current?.scrollTo({ top: listRef.current.scrollHeight });
+        });
     };
 
-    // invia messaggio per il gioco
-    const sendMessage = async (e) => {
-        e.preventDefault();
-        if (!user || !newMsg.trim()) return;
+    // invia messaggio (NO submit nativo)
+    const handleSend = async () => {
+        if (!user || !newMsg.trim() || sending) return;
+        setSending(true);
+        const text = newMsg.trim();
+        setNewMsg("");
+
+        // optimistic append
+        const temp = {
+            id: `temp-${Date.now()}`,
+            user_id: user.id,
+            content: text,
+            created_at: new Date().toISOString(),
+            game_id: Number(gameId),
+        };
+        setMessages((prev) => [...prev, temp]);
+
         const { error } = await supabase.from("messages").insert({
             user_id: user.id,
-            content: newMsg.trim(),
+            content: text,
             game_id: Number(gameId),
         });
-        if (!error) setNewMsg("");
+
+        if (error) {
+            // rollback
+            setMessages((prev) => prev.filter((m) => m.id !== temp.id));
+            setNewMsg(text); // ripristina input
+            alert(error.message || "Invio non riuscito");
+        }
+        setSending(false);
     };
 
-    // realtime: ascolta SOLO i messaggi con quel game_id
+    // blocca submit nativo del form
+    const handleForm = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        handleSend();
+    };
+
+    // invio con Enter (ma senza submit nativo)
+    const onKeyDown = (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            handleSend();
+        }
+    };
+
+    // realtime: solo messaggi del gioco
     useEffect(() => {
         fetchMessages();
 
@@ -51,40 +90,27 @@ export default function ChatRealtimeByGame({ gameId }) {
                 },
                 (payload) => {
                     setMessages((prev) => [...prev, payload.new]);
+                    requestAnimationFrame(() => {
+                        listRef.current?.scrollTo({ top: listRef.current.scrollHeight });
+                    });
                 }
             )
             .subscribe();
 
         return () => supabase.removeChannel(channel);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [gameId]);
-
-    const { id } = useParams(); // RAWG game id
-    const [gameName, setGameName] = useState("");
-
-    useEffect(() => {
-        let active = true;
-        async function load() {
-            try {
-                setLoading(true);
-                const data = await fetchGameById(id);
-                if (active) setGameName(data?.name || `Gioco #${id}`);
-            } catch {
-                if (active) setGameName(`Gioco #${id}`);
-            } finally {
-                if (active) setLoading(false);
-            }
-        }
-        load();
-        return () => { active = false; };
-    }, [id]);
 
     return (
         <div className="max-w-xl mx-auto mt-10 p-4 bg-[#242424] shadow rounded flex flex-col gap-4">
             <h2 className="text-lg font-semibold text-center text-green-700">
-                💬 Chat del gioco {gameName}
+                💬 Chat del gioco #{gameId}
             </h2>
 
-            <div className="h-84 overflow-y-auto border p-2 pt-0 rounded bg-gray-50">
+            <div
+                ref={listRef}
+                className="h-84 overflow-y-auto border p-2 rounded bg-gray-50"
+            >
                 {loading ? (
                     <p className="text-center text-sm text-gray-500">Caricamento...</p>
                 ) : messages.length === 0 ? (
@@ -95,9 +121,9 @@ export default function ChatRealtimeByGame({ gameId }) {
                     messages.map((msg) => (
                         <div
                             key={msg.id}
-                            className={`my-5 p-2 rounded text-sm w-80 ${msg.user_id === user?.id
-                                ? "bg-green-100 text-right ml-auto"
-                                : "bg-gray-200 text-left mr-auto"
+                            className={`my-1 p-2 rounded text-sm w-80 ${msg.user_id === user?.id
+                                    ? "bg-green-100 ml-auto text-right"
+                                    : "bg-gray-200 mr-auto text-left"
                                 }`}
                         >
                             {msg.content}
@@ -110,19 +136,27 @@ export default function ChatRealtimeByGame({ gameId }) {
             </div>
 
             {user ? (
-                <form onSubmit={sendMessage} className="flex gap-2">
+                <form
+                    onSubmit={handleForm}
+                    action="#"
+                    noValidate
+                    className="flex gap-2"
+                >
                     <input
                         type="text"
                         value={newMsg}
                         onChange={(e) => setNewMsg(e.target.value)}
+                        onKeyDown={onKeyDown}
                         placeholder="Scrivi un messaggio..."
-                        className="flex-1 border rounded px-2 py-1 text-sm focus:outline-blue-500"
+                        className="flex-1 border rounded px-2 py-1 text-sm focus:outline-green-600"
                     />
                     <button
-                        type="submit"
-                        className="bg-green-600 text-white px-3 py-1 rounded text-sm"
+                        type="button"               // ← niente submit nativo
+                        onClick={handleSend}
+                        disabled={sending}
+                        className="bg-green-600 text-white px-3 py-1 rounded text-sm disabled:opacity-60"
                     >
-                        Invia
+                        {sending ? "..." : "Invia"}
                     </button>
                 </form>
             ) : (
