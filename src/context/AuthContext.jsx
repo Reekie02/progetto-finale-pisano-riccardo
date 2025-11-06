@@ -194,4 +194,4 @@ export function AuthContext({ children }) {
     );
 }
 
-export const useSession = () => useContext(SessionContext);
+export const useAuth = () => useContext(AuthContext);
