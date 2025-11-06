@@ -1,0 +1,11 @@
+@import 'tailwindcss';
+@import 'bootstrap-icons';
+
+/* :root {
+    color-scheme: light;
+} */
+
+main {
+    background: #151515;
+    color: rgb(1, 168, 62);
+}
