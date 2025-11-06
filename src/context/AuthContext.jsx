@@ -133,9 +133,9 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { supabase } from "../supabase/supabaseClient";
 
-const SessionContext = createContext();
+const AuthContext = createContext();
 
-export function AuthContext({ children }) {
+export function AuthProvider({ children }) {
     const [session, setSession] = useState(null);
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
