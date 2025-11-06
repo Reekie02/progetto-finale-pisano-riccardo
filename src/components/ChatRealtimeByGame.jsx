@@ -1,5 +1,5 @@
 // src/components/ChatRealtimeByGame.jsx
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { supabase } from "../supabase/supabaseClient.js";
 import { useAuth } from "../context/AuthContext.jsx";
 
@@ -21,20 +21,20 @@ export default function ChatRealtimeByGame({ gameId }) {
             .order("created_at", { ascending: true });
         if (!error) setMessages(data || []);
         setLoading(false);
-        // auto scroll in basso
         requestAnimationFrame(() => {
             listRef.current?.scrollTo({ top: listRef.current.scrollHeight });
         });
     };
 
-    // invia messaggio (NO submit nativo)
+    // invio messaggio (no form, no submit nativo)
     const handleSend = async () => {
-        if (!user || !newMsg.trim() || sending) return;
-        setSending(true);
         const text = newMsg.trim();
+        if (!user || !text || sending) return;
+
+        setSending(true);
         setNewMsg("");
 
-        // optimistic append
+        // optimistic update
         const temp = {
             id: `temp-${Date.now()}`,
             user_id: user.id,
@@ -53,20 +53,13 @@ export default function ChatRealtimeByGame({ gameId }) {
         if (error) {
             // rollback
             setMessages((prev) => prev.filter((m) => m.id !== temp.id));
-            setNewMsg(text); // ripristina input
+            setNewMsg(text);
             alert(error.message || "Invio non riuscito");
         }
         setSending(false);
     };
 
-    // blocca submit nativo del form
-    const handleForm = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        handleSend();
-    };
-
-    // invio con Enter (ma senza submit nativo)
+    // invio con Enter (senza submit)
     const onKeyDown = (e) => {
         if (e.key === "Enter" && !e.shiftKey) {
             e.preventDefault();
@@ -74,7 +67,7 @@ export default function ChatRealtimeByGame({ gameId }) {
         }
     };
 
-    // realtime: solo messaggi del gioco
+    // realtime
     useEffect(() => {
         fetchMessages();
 
@@ -98,7 +91,6 @@ export default function ChatRealtimeByGame({ gameId }) {
             .subscribe();
 
         return () => supabase.removeChannel(channel);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [gameId]);
 
     return (
@@ -136,12 +128,7 @@ export default function ChatRealtimeByGame({ gameId }) {
             </div>
 
             {user ? (
-                <form
-                    onSubmit={handleForm}
-                    action="#"
-                    noValidate
-                    className="flex gap-2"
-                >
+                <div className="flex gap-2">
                     <input
                         type="text"
                         value={newMsg}
@@ -151,14 +138,14 @@ export default function ChatRealtimeByGame({ gameId }) {
                         className="flex-1 border rounded px-2 py-1 text-sm focus:outline-green-600"
                     />
                     <button
-                        type="button"               // ← niente submit nativo
+                        type="button"
                         onClick={handleSend}
                         disabled={sending}
                         className="bg-green-600 text-white px-3 py-1 rounded text-sm disabled:opacity-60"
                     >
                         {sending ? "..." : "Invia"}
                     </button>
-                </form>
+                </div>
             ) : (
                 <p className="text-center text-sm text-gray-500">
                     Effettua l'accesso per scrivere nella chat.
