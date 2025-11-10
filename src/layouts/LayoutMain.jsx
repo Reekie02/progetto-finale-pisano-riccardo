@@ -5,7 +5,7 @@ import { useState } from "react";
 import '../styles/navbar.css'
 
 export default function LayoutMain() {
-    const { user, initializing, signOut, profileUsername } = useAuth();
+    const { user, initializing, signOut, username } = useAuth();
     const navigate = useNavigate();
 
     const handleLogout = async () => {
@@ -50,7 +50,7 @@ export default function LayoutMain() {
                                 to="/profile"
                                 className='cursor-pointer rounded-full bg-custom w-10 h-10 flex justify-center items-center font-bold text-2xl'
                             >
-                                {profileUsername && profileUsername[0].toUpperCase()}
+                                {username && username[0].toUpperCase()}
                             </Link>
 
                         </div>
@@ -117,7 +117,7 @@ export default function LayoutMain() {
                                                 to="/profile"
                                                 className='cursor-pointer rounded-full bg-custom w-10 h-10 flex justify-center items-center font-bold text-2xl'
                                             >
-                                                {profileUsername && profileUsername[0].toUpperCase()}
+                                                {username && username[0].toUpperCase()}
                                             </Link>
                                             <p className=" text-sm text-[#666]">Profile</p>
                                         </div>
