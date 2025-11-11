@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 export default function AuthSignUpPage() {
     const { signUp } = useAuth();
@@ -8,6 +9,8 @@ export default function AuthSignUpPage() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+
 
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
@@ -31,8 +34,11 @@ export default function AuthSignUpPage() {
         // PASSWORD
         if (!password.trim()) {
             next.password = "Inserisci una password.";
-        } else if (password.length < 6) {
-            next.password = "La password deve avere almeno 6 caratteri, una lettera maiuscola e un carattere speciale.";
+        } else if (
+            !/^(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{8,}$/.test(password)
+        ) {
+            next.password =
+                "La password deve avere almeno 8 caratteri, una lettera maiuscola e un carattere speciale.";
         }
 
         setFieldErrors(next);
@@ -108,20 +114,39 @@ export default function AuthSignUpPage() {
                 {/* PASSWORD */}
                 <div>
                     <label className="block text-sm mb-1">Password</label>
-                    <input
-                        type="password"
-                        className={`w-full px-3 py-2 text-sm border-b text-green-500
+
+                    <div className="relative">
+
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            className={`w-full px-3 py-2 text-sm border-b text-green-500
                             ${fieldErrors.password ? "border-red-500" : "border-gray-300"}
                         `}
-                        value={password}
-                        onChange={(e) => {
-                            setPassword(e.target.value);
-                            if (fieldErrors.password) {
-                                setFieldErrors((prev) => ({ ...prev, password: "" }));
-                            }
-                        }}
-                        placeholder="Min 6 caratteri"
-                    />
+                            value={password}
+                            onChange={(e) => {
+                                setPassword(e.target.value);
+                                if (fieldErrors.password) {
+                                    setFieldErrors((prev) => ({ ...prev, password: "" }));
+                                }
+                            }}
+                            placeholder="Min 6 caratteri"
+                        />
+
+                        <button
+                            type="button"
+                            onClick={() => setShowPassword((prev) => !prev)}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                            aria-label={showPassword ? "Nascondi password" : "Mostra password"}
+                        >
+                            {showPassword ? (
+                                <EyeOffIcon size={18} />
+                            ) : (
+                                <EyeIcon size={18} />
+                            )}
+                        </button>
+                    </div>
+
+
                     {fieldErrors.password && (
                         <p className="mt-1 text-xs text-red-400">
                             {fieldErrors.password}

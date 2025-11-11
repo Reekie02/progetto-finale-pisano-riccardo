@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
 
 export default function AuthSignInPage() {
     const { signIn } = useAuth();
@@ -9,34 +10,30 @@ export default function AuthSignInPage() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");          // errore generale (server)
-    const [fieldErrors, setFieldErrors] = useState({ // errori UI per campo
+    const [error, setError] = useState("");
+    const [fieldErrors, setFieldErrors] = useState({
         email: "",
         password: "",
     });
 
-    // 🔹 validazione campi
+
     const validate = () => {
         const next = { email: "", password: "" };
 
-        // email
         if (!email.trim()) {
             next.email = "Inserisci la tua email.";
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
             next.email = "Inserisci un'email valida.";
         }
 
-        // password
         if (!password.trim()) {
             next.password = "Inserisci la password.";
-        } else if (password.length < 6) {
-            next.password = "La password deve avere almeno 6 caratteri.";
         }
 
         setFieldErrors(next);
-        // è valido se non ci sono messaggi
         return !next.email && !next.password;
     };
 
@@ -44,7 +41,7 @@ export default function AuthSignInPage() {
         e.preventDefault();
         setError("");
 
-        // se la validazione UI fallisce → non chiamo signIn
+
         const isValid = validate();
         if (!isValid) return;
 
@@ -54,7 +51,12 @@ export default function AuthSignInPage() {
             const redirectTo = location.state?.from ?? "/";
             navigate(redirectTo, { replace: true });
         } catch (err) {
-            setError(err?.message || "Errore di accesso");
+
+            if (err?.message?.toLowerCase().includes("invalid login credentials")) {
+                setError("Email o password non corretti.");
+            } else {
+                setError("Errore di accesso. Riprova più tardi.");
+            }
         } finally {
             setLoading(false);
         }
@@ -78,7 +80,7 @@ export default function AuthSignInPage() {
                     <label className="block text-sm mb-1">Email</label>
                     <input
                         type="email"
-                        className={`w-full px-3 py-2 text-sm border-b text-green-400
+                        className={`w-full px-3 py-2 text-sm border-b text-green-500
                             ${fieldErrors.email ? "border-red-500" : "border-gray-300"}
                         `}
                         value={email}
@@ -101,20 +103,37 @@ export default function AuthSignInPage() {
                 {/* PASSWORD */}
                 <div>
                     <label className="block text-sm mb-1">Password</label>
-                    <input
-                        type="password"
-                        className={`w-full px-3 py-2 text-sm border-b text-green-500
+
+                    <div className="relative">
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            className={`w-full px-3 py-2 text-sm border-b text-green-500
                             ${fieldErrors.password ? "border-red-500" : "border-gray-300"}
                         `}
-                        value={password}
-                        onChange={(e) => {
-                            setPassword(e.target.value);
-                            if (fieldErrors.password) {
-                                setFieldErrors((prev) => ({ ...prev, password: "" }));
-                            }
-                        }}
-                        placeholder="••••••••"
-                    />
+                            value={password}
+                            onChange={(e) => {
+                                setPassword(e.target.value)
+                                if (fieldErrors.password) {
+                                    setFieldErrors((prev) => ({ ...prev, password: "" }));
+                                }
+                            }}
+                            placeholder="••••••••"
+                            required
+                        />
+
+                        <button
+                            type="button"
+                            onClick={() => setShowPassword((prev) => !prev)}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                            aria-label={showPassword ? "Nascondi password" : "Mostra password"}
+                        >
+                            {showPassword ? (
+                                <EyeOffIcon size={18} />
+                            ) : (
+                                <EyeIcon size={18} />
+                            )}
+                        </button>
+                    </div>
                     {fieldErrors.password && (
                         <p className="mt-1 text-xs text-red-400">
                             {fieldErrors.password}

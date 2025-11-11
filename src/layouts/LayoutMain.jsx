@@ -3,6 +3,8 @@ import SearchForm from "../components/SearchForm.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
 import { useState } from "react";
 import '../styles/navbar.css'
+import { Instagram, Linkedin, Twitter } from 'lucide-react';
+
 
 export default function LayoutMain() {
     const { user, initializing, signOut, username } = useAuth();
@@ -54,7 +56,7 @@ export default function LayoutMain() {
 
                         </div>
                     ) : (
-                        <div className="hidden lg:flex items-center gap-2">
+                        <div className="hidden md:flex items-center gap-2">
                             <Link to="/auth/signup" className="border border-green-700 px-3 py-1 rounded  text-sm">Sign Up</Link>
                             <Link to="/auth/signin" className="bg-green-700 text-white px-3 py-1 rounded text-sm">Sign In</Link>
                         </div>
@@ -156,40 +158,102 @@ export default function LayoutMain() {
                 <Outlet />
             </main>
 
-            {/* <footer className="bg-green-700 text-white text-center p-3 text-sm">
-                © 2025 A·KAI
-            </footer> */}
-            <footer className=" bg-[#151515] text-white ">
-                <div className="max-w-5xl mx-auto px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-                    {/* Logo + nome */}
-                    <div className="flex items-center gap-2">
-                        <span className="font-bold text-xl tracking-wide">A·KAI</span>
 
+            <footer className="bg-[#151515] text-white">
+
+                <div className="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-3 gap-8">
+
+                    {/* Logo e descrizione */}
+                    <div>
+                        <h2 className="text-2xl font-bold tracking-wide mb-3 text-green-500">
+                            A·KAI
+                        </h2>
+                        <p className="text-sm text-gray-400 leading-relaxed">
+                            Esplora, scopri e condividi la tua passione per i videogiochi.
+                            Unisciti alla community e trova i titoli che amerai di più.
+                        </p>
                     </div>
 
-                    {/* Link footer */}
-                    <div className="flex gap-6 text-sm">
-                        <Link
-                            to={"/"}
-                            className="hover:text-green-200 transition-colors"
-                        >
-                            Home
-                        </Link>
+                    {/* Link utili */}
+                    <div>
+                        <h3 className="text-lg font-semibold mb-3 text-green-400">
+                            Naviga
+                        </h3>
+                        <ul className="space-y-2 text-sm">
+                            <li>
+                                <Link
+                                    to="/"
+                                    className="hover:text-green-300 transition-colors duration-200"
+                                >
+                                    Home
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    to="/favorites"
+                                    className="hover:text-green-300 transition-colors duration-200"
+                                >
+                                    Preferiti
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    to="/contact"
+                                    className="hover:text-green-300 transition-colors duration-200"
+                                >
+                                    Contatti
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
 
-                        <Link
-                            to={"/contact"}
-                            className="hover:text-green-200 transition-colors"
-                        >
-                            Contact
-                        </Link>
+                    {/* Social o community */}
+                    <div>
+                        <h3 className="text-lg font-semibold mb-3 text-green-400">
+                            Seguimi su
+                        </h3>
+                        <ul className="space-y-2 text-sm">
+                            <li>
+                                <a
+                                    href="https://www.instagram.com/reekie02/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="hover:text-green-300 transition-colors duration-200"
+                                >
+                                    <Instagram />
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="https://twitter.com"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="hover:text-green-300 transition-colors duration-200"
+                                >
+                                    <Twitter />
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="https://www.linkedin.com/in/riccardo-pisano-junior-frontend-developer/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="hover:text-green-300 transition-colors duration-200"
+                                >
+                                    <Linkedin />
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
 
-                <div className="border-t border-green-500/30 text-center py-3 text-xs text-green-100">
-                    © {new Date().getFullYear()} A·KAI · All rights reserved
+                <div className="border-t border-green-500/20"></div>
+
+                {/* Copyright */}
+                <div className="text-center text-xs text-gray-400 py-4">
+                    © {new Date().getFullYear()} A·KAI · Tutti i diritti riservati
                 </div>
-            </footer>
-        </div>
+            </footer>       </div>
     );
 }
