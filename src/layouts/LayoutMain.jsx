@@ -24,9 +24,12 @@ export default function LayoutMain() {
 
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
-            <header className="bg-[#151515] text-white px-10 flex flex-col lg:flex-row items-center gap-3 lg:gap-4 lg:py-3 justify-between uppercase">
+            <header className="bg-[#151515] text-white p-4 px-4
+                   flex md:flex-row
+                   items-center gap-3
+                   justify-between uppercase">
                 <div className="flex items-center gap-6">
-                    <h1 className="text-xl font-bold absolute left-10 top-4 lg:static">
+                    <h1 className="text-xl font-bold absolute left-10 top-4 md:static">
                         <Link to={'/'}>A·KAI</Link>
                     </h1>
                 </div>
@@ -39,7 +42,7 @@ export default function LayoutMain() {
                     {initializing ? (
                         <span className="text-sm opacity-80">...</span>
                     ) : user ? (
-                        <div className="hidden lg:flex items-center gap-5">
+                        <div className="hidden md:flex items-center gap-5">
                             <Link
                                 to="/favorites"
                                 className="text-sm"
@@ -82,61 +85,64 @@ export default function LayoutMain() {
 
                     </button>
 
-                    <div className={`${isOpen && 'h-[180px] bg-[#eee] w-[280px] absolute right-5 top-1 rounded-lg ham-animation p-5 pt-10 flex items-center'}`}>
+                    <div className={`${isOpen && ' bg-[#eee] absolute right-5 top-1 rounded-lg ham-animation p-5 pt-10 flex items-center'}`}>
 
                         {/* <ul className={`${!isOpen ? 'hidden' : 'flex flex-col my-14 px-3 gap-7 h-full w-full'}`}> */}
-                        <ul className={`${!isOpen ? 'hidden' : 'flex flex-col justify-between h-full w-full border rounded-lg p-5 bg-[#151515]'}`}>
+                        <ul className={`${!isOpen ? 'hidden' : 'flex flex-col justify-between h-auto w-[200px] border rounded-lg p-5 bg-[#151515]'}`}>
                             {!user && (
                                 <>
                                     <Link to="/auth/signup" className="border border-green-700 px-3 py-1 rounded text-[.7rem] w-22">Sign Up</Link>
-                                    <Link to="/auth/signin" className="bg-green-700 text-white px-3 py-1 rounded text-[.7rem] w-22">Sign In</Link>
+                                    <Link to="/auth/signin" className="bg-green-700 text-white px-3 py-1 rounded text-[.7rem] w-22 mt-4">Sign In</Link>
                                 </>
                             )}
                             {user && (
                                 <div className="flex justify-between">
 
-                                    <div className="text-[#242424] font-black flex flex-col gap-5 items-center">
+                                    <div className="text-[#eee] font-black flex flex-col gap-5 items-center h-auto w-[170px]">
 
                                         <Link
                                             to="/favorites"
-                                            className="text-sm w-full mt-2 "
+                                            className="text-[.7rem] w-full mt-2 flex"
                                         >
-                                            Favorites ⭐︎
+                                            Favorites ⭐️
                                         </Link>
 
                                         <Link
                                             to="/"
-                                            className="text-sm w-full "
+                                            className="text-[.7rem] w-full "
                                         >
                                             Home 🏠
                                         </Link>
+                                        <Link
+                                            to="/contact"
+                                            className="text-[.7rem] w-full "
+                                        >
+                                            Contatti 📞
+                                        </Link>
                                     </div>
 
-                                    <div className=" flex flex-col gap-6 ">
+                                    <div className=" flex flex-col gap-3 ">
 
                                         <div className="flex flex-col items-center">
                                             <Link
                                                 to="/profile"
-                                                className='cursor-pointer rounded-full bg-custom w-10 h-10 flex justify-center items-center font-bold text-2xl'
+                                                className='cursor-pointer rounded-full bg-custom w-7 h-7 flex justify-center items-center font-bold text-lg'
                                             >
                                                 {username && username[0].toUpperCase()}
                                             </Link>
-                                            <p className=" text-sm text-[#666]">Profile</p>
+                                            <p className=" text-[.7rem] text-[#666]">Profile</p>
                                         </div>
 
                                         <div className="flex flex-col items-center">
                                             <div className=' flex flex-col gap-3'>
-                                                {/* <Link to={'/auth/account'} className="text-md italic text-gray-900 opacity-90">
-                                            {profileUsername}
-                                        </Link> */}
                                                 <button
                                                     onClick={handleLogout}
-                                                    className="bg-red-600 text-white cursor-pointer rounded-full bg-custom2 w-10 h-10 flex justify-center items-center font-bold text-2xl"
+                                                    className="bg-red-600 text-white cursor-pointer rounded-full bg-custom2 w-7 h-7 flex justify-center items-center font-bold text-lg"
                                                 >
                                                     <i className="bi bi-box-arrow-right"></i>
                                                 </button>
                                             </div>
-                                            <p className="text-[#666] text-sm">Logout</p>
+                                            <p className="text-[#666] text-[.7rem]">Logout</p>
                                         </div>
 
                                     </div>
@@ -223,16 +229,7 @@ export default function LayoutMain() {
                                     <Instagram />
                                 </a>
                             </li>
-                            <li>
-                                <a
-                                    href="https://twitter.com"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="hover:text-green-300 transition-colors duration-200"
-                                >
-                                    <Twitter />
-                                </a>
-                            </li>
+
                             <li>
                                 <a
                                     href="https://www.linkedin.com/in/riccardo-pisano-junior-frontend-developer/"

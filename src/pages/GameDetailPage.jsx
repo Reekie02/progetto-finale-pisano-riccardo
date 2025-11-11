@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { fetchGameById } from "../services/rawgApi.js";
 import ToggleFavorite from "../components/ToggleFavorite.jsx";
+import GameChatPage from "./GameChatPage.jsx";
 
 export default function GameDetailPage() {
     const { id } = useParams();
@@ -22,7 +23,7 @@ export default function GameDetailPage() {
     if (!game) return <p className="text-center mt-10 text-red-600">Gioco non trovato.</p>;
 
     return (
-        <div className="max-w-3xl mx-auto mt-10 shadow rounded-lg p-6">
+        <div className=" mx-auto mt-10 p-6">
             <div className="flex justify-between items-center">
                 <h1 className="text-3xl font-bold mb-3">{game.name}</h1>
                 <Link
@@ -43,6 +44,7 @@ export default function GameDetailPage() {
             <div className="flex justify-center">
                 <ToggleFavorite game={game} />
             </div>
+            <GameChatPage gameTitle={game.name} />
         </div>
     );
 }
