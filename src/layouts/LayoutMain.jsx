@@ -22,12 +22,11 @@ export default function LayoutMain() {
 
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
-            <header className="bg-[#151515] text-white p-4 px-10 flex flex-col lg:flex-row items-center gap-3 lg:gap-4 justify-between uppercase">
+            <header className="bg-[#151515] text-white px-10 flex flex-col lg:flex-row items-center gap-3 lg:gap-4 lg:py-3 justify-between uppercase">
                 <div className="flex items-center gap-6">
-                    <h1 className="text-xl font-bold absolute left-10 top-8 lg:static">
+                    <h1 className="text-xl font-bold absolute left-10 top-4 lg:static">
                         <Link to={'/'}>A·KAI</Link>
                     </h1>
-
                 </div>
 
 
@@ -65,7 +64,7 @@ export default function LayoutMain() {
 
 
 
-                <div className='flex gap-5 items-end lg:hidden z-9999 absolute right-10 top-8'>
+                <div className='flex gap-5 items-end lg:hidden z-9999 absolute right-10 top-5'>
 
 
 
@@ -81,13 +80,14 @@ export default function LayoutMain() {
 
                     </button>
 
-                    <div className={`${isOpen && 'h-[170px] bg-[#eee] w-[280px] absolute right-8 top-1 rounded-lg ham-animation pl-5'}`}>
+                    <div className={`${isOpen && 'h-[180px] bg-[#eee] w-[280px] absolute right-5 top-1 rounded-lg ham-animation p-5 pt-10 flex items-center'}`}>
 
-                        <ul className={`${!isOpen ? 'hidden' : 'flex flex-col my-14 px-3 gap-7 h-full w-full'}`}>
+                        {/* <ul className={`${!isOpen ? 'hidden' : 'flex flex-col my-14 px-3 gap-7 h-full w-full'}`}> */}
+                        <ul className={`${!isOpen ? 'hidden' : 'flex flex-col justify-between h-full w-full border rounded-lg p-5 bg-[#151515]'}`}>
                             {!user && (
                                 <>
-                                    <Link to="/auth/signup" className="border text-[#151515] border-green-700 px-3 py-1 rounded text-sm w-22">Sign Up</Link>
-                                    <Link to="/auth/signin" className="bg-green-700 text-white px-3 py-1 rounded text-sm w-22">Sign In</Link>
+                                    <Link to="/auth/signup" className="border border-green-700 px-3 py-1 rounded text-[.7rem] w-22">Sign Up</Link>
+                                    <Link to="/auth/signin" className="bg-green-700 text-white px-3 py-1 rounded text-[.7rem] w-22">Sign In</Link>
                                 </>
                             )}
                             {user && (

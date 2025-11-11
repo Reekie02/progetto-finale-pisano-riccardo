@@ -2,7 +2,7 @@ import icon from '../assets/favicon-02.png'
 export default function CardItem({ title, description, imageUrl }) {
     return (
         // <article className="bg-white rounded-lg shadow hover:shadow-md transition p-4">
-        <article className=' w-[240px] overflow-hidden rounded-lg mt-[12px] bg-[#242424c7] h-[300px] relative'>
+        <article className=' w-[340px] overflow-hidden rounded-lg mt-[12px] bg-[#242424f2] h-[380px] relative'>
             <div className="w-full h-50 mb-3 overflow-hidden rounded shadow-md shadow-green-500">
                 <img
                     src={imageUrl || "https://picsum.photos/seed/placeholder/400/300"}

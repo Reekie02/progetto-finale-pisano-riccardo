@@ -18,7 +18,7 @@ export default function GenreDetailPage() {
         <>
             <div className="flex items-center justify-between mb-6">
                 <h1 className="text-3xl font-bold">
-                    Genere: <span className="uppercase italic">{genre}</span>
+                    Genere: <br /> <span className="uppercase italic">{genre}</span>
                 </h1>
                 <Link to="/" className="text-green-600 hover:underline">
                     ← Torna alla Home

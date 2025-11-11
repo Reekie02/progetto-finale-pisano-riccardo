@@ -35,6 +35,10 @@ input {
 
 @media (300px <=width <=768px) {
 
+    .search:focus {
+        animation: none;
+    }
+
     .navCustom {
         display: none;
     }
