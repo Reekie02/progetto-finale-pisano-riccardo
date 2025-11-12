@@ -129,7 +129,7 @@ export default function AuthSignUpPage() {
                                     setFieldErrors((prev) => ({ ...prev, password: "" }));
                                 }
                             }}
-                            placeholder="Min 6 caratteri"
+                            placeholder="Min 8 caratteri"
                         />
 
                         <button

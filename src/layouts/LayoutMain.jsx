@@ -29,7 +29,7 @@ export default function LayoutMain() {
                    items-center gap-3
                    justify-between uppercase">
                 <div className="flex items-center gap-6">
-                    <h1 className="text-xl font-bold absolute left-10 top-4 md:static">
+                    <h1 className="text-xl font-bold absolute left-10 top-5 md:static">
                         <Link to={'/'}>A·KAI</Link>
                     </h1>
                 </div>
@@ -69,7 +69,7 @@ export default function LayoutMain() {
 
 
 
-                <div className='flex gap-5 items-end lg:hidden z-9999 absolute right-10 top-5'>
+                <div className='flex gap-5 items-end lg:hidden z-9999 absolute right-10 top-6'>
 
 
 
