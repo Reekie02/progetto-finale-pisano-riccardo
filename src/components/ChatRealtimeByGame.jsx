@@ -265,14 +265,14 @@ export default function ChatRealtimeByGame({ gameId, gameTitle }) {
                                 >
                                     <div
                                         className={`my-1 p-2 rounded text-sm w-80 ${mine
-                                                ? "bg-green-100 ml-auto text-right"
-                                                : "bg-gray-200 mr-auto text-left"
+                                            ? "bg-green-100 ml-auto text-right"
+                                            : "bg-gray-200 mr-auto text-left"
                                             }`}
                                     >
                                         <div
                                             className={`flex items-center gap-2 ${mine
-                                                    ? "justify-end"
-                                                    : "justify-start"
+                                                ? "justify-end"
+                                                : "justify-start"
                                                 }`}
                                         >
                                             {!mine && (
@@ -314,7 +314,7 @@ export default function ChatRealtimeByGame({ gameId, gameTitle }) {
 
                 {/* indicator "sta scrivendo" */}
                 {typingUsers.length > 0 && (
-                    <div className="text-[11px] text-gray-300">
+                    <div className="text-[11px] text-green-300">
                         {typingUsers
                             .map((t) => t.username)
                             .slice(0, 2)
