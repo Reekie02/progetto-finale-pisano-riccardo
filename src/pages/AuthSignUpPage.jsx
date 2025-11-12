@@ -84,7 +84,7 @@ export default function AuthSignUpPage() {
 
             <form
                 onSubmit={handleSubmit}
-                noValidate                        // 👈 niente popup del browser
+                noValidate
                 className="space-y-7 text-[#eee]"
             >
                 {/* EMAIL */}

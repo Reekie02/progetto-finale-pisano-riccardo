@@ -25,6 +25,10 @@ export default function GameDetailPage() {
     return (
         <div className=" mx-auto mt-10 p-6 2xl:h-screen">
 
+            <div className="flex justify-center">
+                <h2 className="text-3xl text-green-500 py-5 italic font-bold 2xl:hidden">{game.name}</h2>
+            </div>
+
 
             <div className="flex flex-col gap-5 2xl:flex-row 2xl:items-start">
                 <div className="max-w-2xl mx-auto">
