@@ -23,7 +23,7 @@ export default function GameDetailPage() {
     if (!game) return <p className="text-center mt-10 text-red-600">Gioco non trovato.</p>;
 
     return (
-        <div className=" mx-auto mt-10 p-6 h-screen">
+        <div className=" mx-auto mt-10 p-6 2xl:h-screen">
 
 
             <div className="flex flex-col gap-5 2xl:flex-row 2xl:items-start">
