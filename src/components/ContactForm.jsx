@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 
 export default function ContactForm() {
@@ -35,11 +34,14 @@ export default function ContactForm() {
 
         try {
             setSending(true);
-            const res = await fetch("/api/contact", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(form),
-            });
+            const res = await fetch(
+                "https://kuevwxltovnujsfzjujm.functions.supabase.co/contact",
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(form),
+                }
+            );
 
             if (!res.ok) {
                 const body = await res.json().catch(() => ({}));
