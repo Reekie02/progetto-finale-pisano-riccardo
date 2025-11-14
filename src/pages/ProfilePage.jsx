@@ -86,9 +86,12 @@ export default function ProfilePage() {
 
             <form onSubmit={handleUpdate} className="space-y-7">
                 <div>
-                    <label className="block text-sm mb-1">Email</label>
+                    <label htmlFor="email" className="block text-sm mb-1">Email</label>
                     <input
                         type="email"
+                        id="email"
+                        name="email"
+                        autoComplete="email"
                         value={user.email}
                         disabled
                         className="w-full border rounded px-3 py-2 text-sm bg-gray-100"
@@ -96,9 +99,12 @@ export default function ProfilePage() {
                 </div>
 
                 <div>
-                    <label className="block text-sm mb-1">Username</label>
+                    <label htmlFor="username" className="block text-sm mb-1">Username</label>
                     <input
                         type="text"
+                        id="username"
+                        name="username"
+                        autoComplete="username"
                         value={profile.username}
                         onChange={(e) => setProfile({ username: e.target.value })}
                         className="w-full border rounded px-3 py-2 text-sm"

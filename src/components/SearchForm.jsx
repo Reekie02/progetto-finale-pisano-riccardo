@@ -17,6 +17,8 @@ export default function SearchForm() {
         <form onSubmit={handleSubmit} className="flex items-center">
             <input
                 type="text"
+                id="search"
+                name="search"
                 placeholder="Cerca un gioco..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}

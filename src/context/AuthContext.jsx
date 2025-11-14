@@ -249,7 +249,6 @@ export function AuthProvider({ children }) {
             mounted = false;
             listener?.subscription?.unsubscribe?.();
         };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     // carica username dal profilo
