@@ -6,21 +6,23 @@ const Footer = () => {
     return (
         <footer className="bg-[#151515] text-white">
 
-            <div className="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-3 gap-8">
+            {/* <div className="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-3 gap-8"> */}
+            <div className=" px-6 py-10 flex flex-col md:flex-row md:gap-8 justify-between">
+
 
                 {/* Logo e descrizione */}
-                <div>
+                <div className='lg:w-[700px]'>
                     <h2 className="text-2xl font-bold tracking-wide mb-3 text-green-500">
                         A·KAI
                     </h2>
-                    <p className="text-sm text-gray-400 leading-relaxed">
+                    <p className="text-sm text-gray-400 leading-relaxed lg:w-[400px]">
                         Esplora, scopri e condividi la tua passione per i videogiochi.
                         Unisciti alla community e trova i titoli che amerai di più.
                     </p>
                 </div>
 
                 {/* Link utili */}
-                <div>
+                <div className='lg:w-[700px]'>
                     <h3 className="text-lg font-semibold mb-3 text-green-400">
                         Naviga
                     </h3>
@@ -53,7 +55,7 @@ const Footer = () => {
                 </div>
 
                 {/* Social o community */}
-                <div>
+                <div className='lg:w-[300px]'>
                     <h3 className="text-lg font-semibold mb-3 text-green-400">
                         Seguimi su
                     </h3>
