@@ -1,7 +1,7 @@
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import SearchForm from "../components/SearchForm.jsx";
 import { useAuth } from "../context/AuthContext.jsx";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import '../styles/navbar.css'
 import { Instagram, Linkedin, Twitter } from 'lucide-react';
 
@@ -9,6 +9,8 @@ import { Instagram, Linkedin, Twitter } from 'lucide-react';
 export default function LayoutMain() {
     const { user, initializing, signOut, username } = useAuth();
     const navigate = useNavigate();
+    const [isOpen, setIsOpen] = useState(false)
+    const mobileMenuRef = useRef(null);
 
     const handleLogout = async () => {
         try {
@@ -19,8 +21,17 @@ export default function LayoutMain() {
         }
     };
 
-    const [isOpen, setIsOpen] = useState(false)
-    // const [isOpen2, setIsOpen2] = useState(false)
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if (mobileMenuRef.current && !mobileMenuRef.current.contains(e.target)) {
+                setIsOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
+
 
     return (
         <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -69,7 +80,7 @@ export default function LayoutMain() {
 
 
 
-                <div className='flex gap-5 items-end lg:hidden z-9999 absolute right-10 top-6'>
+                <div ref={mobileMenuRef} className='flex gap-5 items-end lg:hidden z-9999 absolute right-10 top-6'>
 
 
 
