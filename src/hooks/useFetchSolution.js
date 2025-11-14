@@ -1,32 +1,52 @@
+import { useEffect, useState } from "react";
 
-import { useCallback, useEffect, useState } from "react";
+export default function useFetchSolution(url) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
+  useEffect(() => {
+    if (!url) {
+      setData(null);
+      setLoading(false);
+      setError(null);
+      return;
+    }
 
-export default function useFetchSolution(initialUrl = "") {
-    const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
-    const [url, setUrl] = useState(initialUrl);
+    let abort = false;
 
-    const doFetch = useCallback(async (currentUrl) => {
-        if (!currentUrl) return;
-        try {
-            setLoading(true);
-            setError("");
-            const res = await fetch(currentUrl);
-            if (!res.ok) throw new Error(`HTTP ${res.status}`);
-            const json = await res.json();
-            setData(json);
-        } catch (e) {
-            setError(e?.message || "Errore di rete");
-        } finally {
-            setLoading(false);
+    async function fetchData() {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const res = await fetch(url);
+        if (!res.ok) {
+          throw new Error("Errore durante il caricamento dei dati");
         }
-    }, []);
 
-    useEffect(() => {
-        doFetch(url);
-    }, [url, doFetch]);
+        const json = await res.json();
+        if (!abort) {
+          setData(json);
+        }
+      } catch (err) {
+        if (!abort) {
+          setError(err.message || "Errore sconosciuto");
+        }
+      } finally {
+        if (!abort) {
+          setLoading(false);
+        }
+      }
+    }
 
-    return { data, loading, error, url, setUrl, refetch: () => doFetch(url) };
+    fetchData();
+
+
+    return () => {
+      abort = true;
+    };
+  }, [url]);
+
+  return { data, loading, error };
 }
