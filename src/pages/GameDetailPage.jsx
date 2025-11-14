@@ -45,12 +45,14 @@ export default function GameDetailPage() {
                 </div>
 
                 <div className="">
-                    {/* CHAT */}
-                    <GameChatPage gameTitle={game.name} />
+                    <div className="flex flex-col items-center gap-6">
+                        {/* CHAT */}
+                        <div className="w-screen md:w-[800px]">
+                            <GameChatPage gameTitle={game.name} />
+                        </div>
 
-                    {/* INFO EXTRA */}
-                    <div className="flex justify-center">
-                        <div className="w-screen md:w-[800px] my-8 space-y-6 bg-[#242424c7] p-6 rounded-lg">
+                        {/* INFO EXTRA */}
+                        <div className="w-screen md:w-[800px] my-8 space-y-6 bg-[#242424c7] p-6 md:rounded-xl">
                             {/* GENERI */}
                             {game.genres?.length > 0 && (
                                 <div>

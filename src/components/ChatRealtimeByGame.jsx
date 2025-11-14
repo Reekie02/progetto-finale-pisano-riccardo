@@ -230,7 +230,7 @@ export default function ChatRealtimeByGame({ gameId, gameTitle }) {
 
     return (
         <div className="flex items-start justify-center">
-            <div className="bg-[#242424] text-white rounded-xl shadow p-6 flex flex-col gap-4 w-screen md:w-[800px]">
+            <div className="bg-[#242424] text-white md:rounded-xl shadow p-6 flex flex-col gap-4 w-screen md:w-[800px]">
                 <h2 className="text-lg font-semibold text-center text-green-600">
                     💬 Chat del gioco:{" "}
                     <span className="text-green-600">{gameTitle}</span>
