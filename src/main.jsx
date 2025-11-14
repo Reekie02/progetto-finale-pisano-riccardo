@@ -36,7 +36,7 @@ const router = createBrowserRouter([
         children: [
           { path: "profile", element: <ProfilePage /> },
           { path: "favorites", element: <FavoritesPage /> },
-          { path: "game/:id/chat", element: <GameChatPage /> }, // 👈 per-gioco
+          { path: "game/:id/chat", element: <GameChatPage /> },
         ],
       },
     ],
@@ -44,11 +44,11 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <AuthProvider>
-      <FavoritesProvider>
-        <RouterProvider router={router} />
-      </FavoritesProvider>
-    </AuthProvider>
-  </React.StrictMode>
+
+  <AuthProvider>
+    <FavoritesProvider>
+      <RouterProvider router={router} />
+    </FavoritesProvider>
+  </AuthProvider>
+
 );

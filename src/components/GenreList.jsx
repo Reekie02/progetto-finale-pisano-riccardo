@@ -1,4 +1,3 @@
-// src/components/GenreList.jsx
 import { Link } from "react-router-dom";
 import useFetchSolution from "../hooks/useFetchSolution.js";
 import CardItem from "./CardItem.jsx";
@@ -16,11 +15,9 @@ export default function GenreList() {
 
     const genres = Array.isArray(data?.results) ? data.results : [];
 
+
     return (
-        // <section className="mt-10">
         <section className="mt-10">
-            {/* <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3"> */}
-            {/* <h2 className="text-2xl font-semibold mb-4 ml-4">Generi</h2> */}
             <div className="flex flex-wrap gap-10 justify-center max-w-[calc(full-1.5rem)">
                 {genres.map((gen) => (
                     <Link key={gen.id} to={`/genre/${encodeURIComponent(gen.slug)}`}>

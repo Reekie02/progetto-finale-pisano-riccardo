@@ -43,7 +43,52 @@ export default function GameDetailPage() {
                         <ToggleFavorite game={game} />
                     </div>
                 </div>
-                <GameChatPage gameTitle={game.name} />
+
+                <div className="md:w-[800px]">
+                    <GameChatPage gameTitle={game.name} />
+                    {/* INFO EXTRA */}
+                    <div className="my-8 space-y-6 bg-[#242424c7] p-6 rounded-lg">
+
+                        {/* GENERI */}
+                        {game.genres?.length > 0 && (
+                            <div>
+                                <h3 className="text-xl font-semibold text-green-500 mb-2">🎮 Generi</h3>
+                                <div className="flex flex-wrap gap-2">
+                                    {game.genres.map((g) => (
+                                        <span
+                                            key={g.id}
+                                            className="px-3 py-1 bg-[#1e1e1e] text-green-400 text-sm rounded-md border border-green-700/40"
+                                        >
+                                            {g.name}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {/* PIATTAFORME */}
+                        {game.platforms?.length > 0 && (
+                            <div className="">
+                                <h3 className="text-xl font-semibold text-green-500 mb-2">🕹️ Piattaforme</h3>
+                                <div className="flex flex-wrap gap-2">
+                                    {game.platforms.map((p) => (
+                                        <span
+                                            key={p.platform.id}
+                                            className="px-3 py-1 bg-[#1e1e1e] text-green-400 text-sm rounded-md border border-green-700/40"
+                                        >
+                                            {p.platform.name}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                    </div>
+                </div>
+
+
+
+
             </div>
         </div>
     );
