@@ -29,10 +29,10 @@ const Footer = () => {
                     <ul className="space-y-2 text-sm">
                         <li>
                             <Link
-                                to="/"
+                                to="/about"
                                 className="hover:text-green-300 transition-colors duration-200"
                             >
-                                Home
+                                About
                             </Link>
                         </li>
                         <li>

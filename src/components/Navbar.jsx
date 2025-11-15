@@ -35,6 +35,17 @@ const Navbar = () => {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
+
+
+
+
+
+
+
+
+
+
+
     return (
         <header
             className="bg-[#151515] text-white p-4 px-4
@@ -81,6 +92,7 @@ const Navbar = () => {
                     </div>
                 ) : (
                     <div className="hidden md:flex items-center gap-2">
+
                         <Link
                             to="/auth/signup"
                             className="border border-green-700 px-3 py-1 rounded  text-sm"

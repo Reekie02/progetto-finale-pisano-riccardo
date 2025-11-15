@@ -5,7 +5,7 @@ import { AuthProvider } from "./context/AuthContext.jsx";
 import { FavoritesProvider } from "./context/FavoritesContext.jsx";
 import LayoutMain from "./layouts/LayoutMain.jsx";
 import HomePage from "./pages/HomePage.jsx";
-// import AboutPage from "./pages/AboutPage.jsx";
+import AboutPage from "./pages/AboutPage.jsx";
 import GenreDetailPage from "./pages/GenreDetailPage.jsx";
 import GameDetailPage from "./pages/GameDetailPage.jsx";
 import GameChatPage from "./pages/GameChatPage.jsx";
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
     element: <LayoutMain />,
     children: [
       { index: true, element: <HomePage /> },
-      // { path: "about", element: <AboutPage /> },
+      { path: "about", element: <AboutPage /> },
       { path: "genre/:genre", element: <GenreDetailPage /> },
       { path: "game/:id", element: <GameDetailPage /> },
       { path: "search", element: <SearchPage /> },
