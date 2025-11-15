@@ -53,7 +53,7 @@ const Navbar = () => {
                    items-center gap-3
                    justify-between uppercase"
         >
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-6 md:w-[100px]">
                 <h1 className="text-xl font-bold absolute left-10 top-5 md:static">
                     <Link to={"/"}>A·KAI</Link>
                 </h1>

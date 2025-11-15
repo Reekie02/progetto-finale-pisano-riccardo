@@ -15,10 +15,16 @@ export default function FavoritesPage() {
             {favorites.length === 0 ? (
                 <p className="text-gray-600">Non hai ancora aggiunto giochi ai preferiti.</p>
             ) : (
-                // <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
                 <div className="flex flex-wrap gap-10 justify-center md:justify-start">
                     {favorites.map((fav) => (
-                        <div key={fav.id} className="bg-[#242424] shadow rounded-lg overflow-hidden">
+                        <div key={fav.id} className="
+                overflow-hidden
+                rounded-lg
+                bg-[#242424de]
+                md:transition-transform duration-300 ease-out
+                md:hover:scale-105               
+                md:hover:-translate-y-1          
+                md:hover:shadow-[0_18px_40px_rgba(0,0,0,0.65)]">
                             <Link to={`/game/${fav.game_id}`}>
                                 <img
                                     src={fav.game_image || "https://picsum.photos/seed/placeholder/600/400"}

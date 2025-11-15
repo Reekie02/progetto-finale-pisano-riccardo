@@ -44,7 +44,7 @@ export default function CardItem({
                     className="
                         pointer-events-none
                         absolute inset-0
-                        {bg-gradient-to-t from-black/70 via-black/20 to-transparent}
+                        bg-linear-to-t from-black/70 via-black/20 to-transparent
                         opacity-70
                         transition-opacity duration-200
                         group-hover:opacity-90
