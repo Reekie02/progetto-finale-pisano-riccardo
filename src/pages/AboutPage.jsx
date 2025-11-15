@@ -1,6 +1,6 @@
 export default function AboutPage() {
     return (
-        <div className="min-h-screen px-6 py-12 text-white">
+        <div className="min-h-screen px-6 py-12 text-white md:mt-10">
             {/* HERO SECTION */}
             <section className="max-w-5xl mx-auto text-center mb-16">
                 <p className="uppercase tracking-[0.25em] text-xs text-green-500 mb-4">
@@ -44,7 +44,7 @@ export default function AboutPage() {
             </section>
 
             {/* SEZIONE VALORE */}
-            <section className="max-w-5xl mx-auto grid gap-10 md:grid-cols-2 items-start mb-16">
+            <section className="max-w-5xl mx-auto grid gap-10 md:grid-cols-2 items-start mt-16 md:my-26 ">
                 <div>
                     <h2 className="text-2xl md:text-3xl font-bold mb-4">
                         Un hub operativo per professionisti, creator e appassionati.
