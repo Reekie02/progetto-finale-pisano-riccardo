@@ -34,8 +34,16 @@ export default function SearchPage() {
                                 <Link key={game.id} to={`/game/${game.id}`}>
                                     <CardItem
                                         title={game.name}
-                                        description={`Rating: ${game.rating ?? "n/d"}`}
+                                        description={game.short_description}
                                         imageUrl={game.background_image}
+                                        rating={game.rating?.toFixed(2)}
+                                        released={game.released}
+                                        genres={game.genres
+                                            ?.map((g) => g.name)
+                                            .join(" · ")}
+                                        extra={game.parent_platforms
+                                            ?.map((p) => p.platform.name)
+                                            .join(" · ")}
                                     />
                                 </Link>
                             ))}
