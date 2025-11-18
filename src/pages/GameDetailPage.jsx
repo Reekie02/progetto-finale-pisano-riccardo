@@ -65,7 +65,8 @@ export default function GameDetailPage() {
                                                 key={g.id}
                                                 className="px-3 py-1 bg-[#1e1e1e] text-green-400 text-sm rounded-md border border-green-700/40"
                                             >
-                                                {g.name}
+
+                                                <Link to={`/genre/${encodeURIComponent(g.slug)}`}>{g.name}</Link>
                                             </span>
                                         ))}
                                     </div>

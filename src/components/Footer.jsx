@@ -7,11 +7,11 @@ const Footer = () => {
         <footer className="bg-[#151515] text-white">
 
             {/* <div className="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-3 gap-8"> */}
-            <div className=" px-6 py-10 flex flex-col md:flex-row md:gap-8 justify-between">
+            <div className=" px-8 py-10 flex flex-col md:flex-row md:gap-8 justify-between">
 
 
                 {/* Logo e descrizione */}
-                <div className='lg:w-[700px]'>
+                <div className='lg:w-[900px]'>
                     <h2 className="text-2xl font-bold tracking-wide mb-3 text-green-500">
                         A·KAI
                     </h2>
@@ -22,7 +22,7 @@ const Footer = () => {
                 </div>
 
                 {/* Link utili */}
-                <div className='lg:w-[700px]'>
+                <div className='lg:w-[900px]'>
                     <h3 className="text-lg font-semibold mb-3 text-green-400">
                         Naviga
                     </h3>
@@ -55,8 +55,8 @@ const Footer = () => {
                 </div>
 
                 {/* Social o community */}
-                <div className='lg:w-[300px]'>
-                    <h3 className="text-lg font-semibold mb-3 text-green-400">
+                <div className='lg:w-auto'>
+                    <h3 className="text-lg font-semibold mb-3 text-green-400 w-[100px]">
                         Seguimi su
                     </h3>
                     <ul className="space-y-2 text-sm">
